@@ -150,17 +150,21 @@ export class AtividadeGruposComponent implements OnInit {
   confirmarResetTodos() {
     this.ModalResetTodos = false;
 
-    this.ModalSucesso = true;
-    this.ModalErro = false;
-
     this.grupoService.resetarTodosGrupos().subscribe({
-      next: () => {},
-      error: () => {},
-    });
+      next: () => {
+        this.ModalSucesso = true;
+        this.ModalErro = false;
 
-    setTimeout(() => {
-      window.location.reload();
-    }, 2500);
+        setTimeout(() => {
+          this.carregarGrupos();
+          this.ModalSucesso = false;
+        }, 2500);
+      },
+      error: () => {
+        this.ModalSucesso = false;
+        this.ModalErro = true;
+      },
+    });
   }
 
   abrirConfirmacaoResetGrupo(idGrupo: number) {
@@ -173,19 +177,23 @@ export class AtividadeGruposComponent implements OnInit {
 
     this.ModalResetGrupo = false;
 
-    this.ModalSucesso = true;
-    this.ModalErro = false;
-
     this.grupoService.resetarGrupo(this.grupoResetId).subscribe({
-      next: () => {},
-      error: () => {},
+      next: () => {
+        this.ModalSucesso = true;
+        this.ModalErro = false;
+
+        setTimeout(() => {
+          this.carregarGrupos();
+          this.ModalSucesso = false;
+        }, 2500);
+      },
+      error: () => {
+        this.ModalSucesso = false;
+        this.ModalErro = true;
+      },
     });
 
     this.grupoResetId = null;
-
-    setTimeout(() => {
-      window.location.reload();
-    }, 2500);
   }
 
   atualizarGrupos() {
