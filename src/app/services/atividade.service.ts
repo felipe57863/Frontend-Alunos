@@ -20,7 +20,7 @@ export class AtividadeService {
 
   criarAtividade(registroForm: RegistroForm): Observable<void> {
     return this.http.post<void>(
-      `${this.baseUrl}/cadastrar-trabalhos-grupos`,
+      `${this.baseUrl}/cadastrar-trabalho-grupos`,
       registroForm
     );
   }
