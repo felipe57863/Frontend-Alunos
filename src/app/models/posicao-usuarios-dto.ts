@@ -1,4 +1,4 @@
 export interface PosicaoUsuariosDTO {
     posicao: number;
-    nomeUsuario: string;
+    nomeUsuario: string | null;
 }
