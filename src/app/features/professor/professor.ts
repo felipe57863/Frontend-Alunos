@@ -65,7 +65,6 @@ export class ProfessorComponent implements OnInit {
       this.grupoForm.push(
         this.fb.group({
           nomeGrupo: ['', Validators.required],
-          atividade: this.atividadeForm.get('descricaoAtividade') as FormArray,
           quantidadeMaximaAluno: [0],
         }),
       );
@@ -99,12 +98,16 @@ export class ProfessorComponent implements OnInit {
       return;
     }
 
+    const descricaoAtividade = this.atividadeForm.value.descricaoAtividade;
+
     const payload: RegistroForm = {
-      descricaoAtividade: this.atividadeForm.value.descricaoAtividade,
-
+      descricaoAtividade,
       quantidadeTotalAlunosSala: this.atividadeForm.value.quantidadeTotalAlunosSala,
-
-      grupoForm: this.grupoForm.value,
+      grupoForm: this.grupoForm.value.map((grupo: any) => ({
+        nomeGrupo: grupo.nomeGrupo,
+        atividade: descricaoAtividade,
+        quantidadeMaximaAluno: grupo.quantidadeMaximaAluno,
+      })),
     };
 
     this.mostrarToast = true;
