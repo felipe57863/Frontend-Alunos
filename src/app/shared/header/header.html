@@ -1,5 +1,9 @@
 <div class="header">
 
+  <a *ngIf="backLink" class="back-btn" [routerLink]="backLink">
+    <i class="bi bi-arrow-left"></i>
+  </a>
+
   <div class="info-link-container">
     <a class="info-link" href="/sobre" target="_blank">
       <i class="bi bi-question-circle"></i>
